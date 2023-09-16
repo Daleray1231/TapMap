@@ -13,57 +13,78 @@
   </head>
 
   <body>
-    <div class="">
-      <div class="">
-        <h1 class="">TapMap</h1>
-        <form id="search-form" class="">
-          <input
-            id="search-input"
-            class=""
-            type="text"
-            placeholder="City/Zip"
-          />
-          <select id="format-input" class="">
-            <option value="" disabled selected>Select a format...</option>
-            <option value="maps">Micro</option>
-            <option value="audio">Regional</option>
-            <option value="photos"></option>
-            <option value="manuscripts"></option>
-            <option value="newspapers"></option>
-            <option value="film-and-videos"></option>
-            <option value="notated-music"></option>
-            <option value="websites"></option>
-          </select>
-          <button class="">Click Me</button>
+    <div class="has-background-grey-light">
+      <div class="p-5">
+        <h1 class="is-size-1 has-text-weight-bold has-text-success-dark has-text-centered">TapMap</h1>
+        <p class="is-size-5 has-text-weight-bold has-text-dark">Find A Brewery:</p>
+        <h3 class=""></h3>
+          <form id="search-form" class="">
+            <input id="search-input" class="" type="text" placeholder="City/Zip"/>
+        </h3>
+
+        <select id="format-input" class="pr-6 mb-3">
+          
+            <option value="" disabled selected>Filter By:</option>
+            <option value="craft-brewery">Craft</option>
+            <option value="macro-brewery">Macro</option>
+            <option value="micro-brewery">Micro</option>
+            <option value="brewpubs">Brewpubs</option>
+            <option value="dog-friendly-brewery">Dog Friendly</option>
+            <option value="brewery-tours">Offers Tours</option>  
+        </select>
+        <br>
+          <button class="has-background-success-dark has-text-light p-2">Beer Me Up, Scotty!</button>
         </form>
-        <section class="mapContianer">MAP</section>
-        <div class="brewery_list">
+        </div>
+    </div>
+    <section class="hero is-small is-dark">
+      <div class="hero-body">
+        
+      </div>
+    </section>
+        <section class="mapContainer px-5 py-3 has-text-centered">
+        <h2 class="is-size-3 has-text-weight-bold has-text-success-dark">MAP</h2></section>
+        <div class="card-image has-text-centered">
+          <figure class="image is-256x256 px-5 is-inline-block pb-5">
+            <img src="https://bulma.io/images/placeholders/256x256.png">
+          </figure>
+        </div>
+        <div class="brewery_list px-5">
           <ul>
-            <div>
+            <div class="py-1">
               <h3>
-                <p>list1</p>
+                <p>LIST 1 : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic eos, quae tenetur assumenda dolorem ab perferendis vitae aliquid fugiat excepturi temporibus? Laborum, natus necessitatibus nihil officia aperiam placeat autem adipisci.</p>
               </h3>
             </div>
-            <div>
+            <div class="py-1">
               <h3>
-                <p>list2</p>
+                <p>LIST 2 : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic eos, quae tenetur assumenda dolorem ab perferendis vitae aliquid fugiat excepturi temporibus? Laborum, natus necessitatibus nihil officia aperiam placeat autem adipisci.</p>
               </h3>
             </div>
-            <div>
+            <div class="py-1">
               <h3>
-                <p>list3</p>
+                <p>LIST 3 : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic eos, quae tenetur assumenda dolorem ab perferendis vitae aliquid fugiat excepturi temporibus? Laborum, natus necessitatibus nihil officia aperiam placeat autem adipisci.</p>
               </h3>
             </div>
-            <div>
+            <div class="py-1 pb-5">
               <h3>
-                <p>list4</p>
+                <p>LIST 4 : Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic eos, quae tenetur assumenda dolorem ab perferendis vitae aliquid fugiat excepturi temporibus? Laborum, natus necessitatibus nihil officia aperiam placeat autem adipisci.</p>
               </h3>
             </div>
           </ul>
         </div>
       </div>
     </div>
-
+    <section class="hero is-small is-dark">
+      <div class="hero-body">
+      </div>
+    </section>
+    <footer class="footer has-background-grey-light">
+      <div class="content has-text-centered ">
+        <h4 class="has-text-dark"><strong> Copyright 2023 Team TapMap <br> </h4>
+        <h5 class="has-text-success-dark"> 🍺 Cheers!  Prost!  Sláinte!  Saúde!  Şerefe!  ¡Salud!  Santé!  Skål!  Kāmau! 🍺 </h5>
+      </div>
+    </footer>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
