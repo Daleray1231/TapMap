@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TapMap</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400&family=Merriweather:wght@700&display=swap"
       rel="stylesheet"
@@ -25,12 +27,12 @@
         <select id="format-input" class="pr-6 mb-3">
           
             <option value="" disabled selected>Filter By:</option>
-            <option value="craft-brewery">Craft</option>
-            <option value="macro-brewery">Macro</option>
-            <option value="micro-brewery">Micro</option>
-            <option value="brewpubs">Brewpubs</option>
-            <option value="dog-friendly-brewery">Dog Friendly</option>
-            <option value="brewery-tours">Offers Tours</option>  
+            <!-- <option value="craft-brewery">Craft</option> -->
+            <!-- <option value="macro-brewery">Macro</option> -->
+            <option value="micro">Micro brewery</option>
+            <option value="brewpub">Brewpubs</option>
+            <!-- <option value="dog-friendly-brewery">Dog Friendly</option>
+            <option value="brewery-tours">Offers Tours</option>   -->
         </select>
         <br>
           <button class="has-background-success-dark has-text-light p-2">Beer Me Up, Scotty!</button>
@@ -45,9 +47,10 @@
         <section class="mapContainer px-5 py-3 has-text-centered">
         <h2 class="is-size-3 has-text-weight-bold has-text-success-dark">MAP</h2></section>
         <div class="card-image has-text-centered">
-          <figure class="image is-256x256 px-5 is-inline-block pb-5">
+          <!-- <figure class="image is-256x256 px-5 is-inline-block pb-5">
             <img src="https://bulma.io/images/placeholders/256x256.png">
-          </figure>
+          </figure> -->
+          <div id="mapid" style="height: 400px; width: 100%;"></div> 
         </div>
         <div class="brewery_list px-5">
           <ul>
@@ -85,6 +88,6 @@
         <h5 class="has-text-success-dark"> 🍺 Cheers!  Prost!  Sláinte!  Saúde!  Şerefe!  ¡Salud!  Santé!  Skål!  Kāmau! 🍺 </h5>
       </div>
     </footer>
-    <script src="./assets/js/script.js"></script>
+    <script src="/assets/javascript/script.js"></script>
   </body>
 </html>
