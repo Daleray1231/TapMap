@@ -32,10 +32,10 @@ The application was designed based on the following criteria:
 
 
 ## Collaborators
--Christi Tugwell - CSS, 
--Cimarron Jenschke - Javascript, APIs, 
+-Christi Tugwell - CSS
+-Cimarron Jenschke - Javascript, APIs
 -Clayton Guerrero - HTML, APIs
--Dale Haynie - CSS, 
+-Dale Haynie - CSS 
 -David Gray - Javascript, APIs
 
 ## A Message from Team TapMap
