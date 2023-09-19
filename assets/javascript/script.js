@@ -64,7 +64,7 @@ async function searchApi(query, type, queryType) {
 
     // Center the map to the first brewery's location
     if (breweryList.length > 0 && breweryList[0].latitude && breweryList[0].longitude) {
-      map.setView([breweryList[0].latitude, breweryList[0].longitude], 10);
+      map.setView([breweryList[0].latitude, breweryList[0].longitude], 12);
     }
 
     if (!breweryList.length) {
