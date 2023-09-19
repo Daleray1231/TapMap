@@ -47,13 +47,17 @@ function createCard(brewery) {
   const type = document.createElement("p");
   type.textContent = `Type: ${brewery.brewery_type}`;
 
-  // to put a marker on the map for each brewery
-  if (brewery.latitude && brewery.longitude) {
-    const marker = L.marker([brewery.latitude, brewery.longitude], { icon: beerIcon }).addTo(map)
-      .bindPopup(`<b>${brewery.name}</b><br>Type: ${brewery.brewery_type}`)
-      .openPopup();
-    markers.push(marker); // Add the marker to the markers array
-  }
+    // to put a marker on the map for each brewery
+    if (brewery.latitude && brewery.longitude) {
+      const marker = L.marker([brewery.latitude, brewery.longitude], { icon: beerIcon }).addTo(map)
+        .bindPopup(`<b>${brewery.name}</b><br>Type: ${brewery.brewery_type}`);
+      markers.push(marker); // Add the marker to the markers array
+  
+      // Add a click event listener to open the popup when the marker is clicked
+      marker.on('click', function() {
+        this.openPopup();
+      });
+    }
 
   cardBody.append(title, type, street, cityState);
   card.append(cardBody);
