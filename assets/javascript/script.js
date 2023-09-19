@@ -9,6 +9,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
 }).addTo(map);
 
+// Define the custom beer icon
+const beerIcon = L.divIcon({
+  className: 'beer-icon',
+  html: '🍺',
+  iconSize: [200, 200], // Set the size of the icon
+});
+
 // Create a card element for a brewery
 function createCard(brewery) {
   const card = document.createElement('div');
@@ -31,7 +38,7 @@ function createCard(brewery) {
 
   // to put a marker on the map for each brewery
   if (brewery.latitude && brewery.longitude) {
-    L.marker([brewery.latitude, brewery.longitude]).addTo(map)
+    L.marker([brewery.latitude, brewery.longitude], { icon: beerIcon }).addTo(map)
       .bindPopup(`<b>${brewery.name}</b><br>Type: ${brewery.brewery_type}`)
       .openPopup();
   }
