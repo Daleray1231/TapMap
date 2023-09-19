@@ -9,11 +9,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
 }).addTo(map);
 
-// Define the custom beer icon
-const beerIcon = L.divIcon({
-  className: 'beer-icon',
-  html: '🍺',
-  iconSize: [200, 200], // Set the size of the icon
+// Define the custom beer icon image
+const beerIcon = L.icon({
+  iconUrl: 'assets/images/beermug2.png', // Replace with the actual URL or file path to your beer icon image
+  iconSize: [54, 54], // Set the size of the icon
 });
 
 // Create a card element for a brewery
