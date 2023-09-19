@@ -1,6 +1,7 @@
 // Selecting HTML elements
-const resultContentEl = document.querySelector(".brewery_list ul");
-const searchFormEl = document.querySelector("#search-form");
+const resultContentEl = document.querySelector('.brewery_list ul');
+const searchFormEl = document.querySelector('#search-form');
+const lastSearches = [];
 const errorMessage = document.createElement("h4");
 
 // Initialize the map
@@ -73,6 +74,18 @@ function createCard(brewery) {
   resultContentEl.append(card);
 }
 
+// Function to display the last 5 searches
+function displayLastSearches(){
+  const lastSearchContainer = document.querySelector('#last-searches');
+  lastSearchContainer.innerHTML = '';
+
+  lastSearches.slice(-5).forEach(function(search, index){
+    const searchItem = document.createElement('div');
+    searchItem.textContent = `Search ${index + 1}: ${JSON.stringify(search)}`;
+    lastSearchContainer.appendChild(searchItem);
+  });
+}
+
 // Fetch brewery data based on search parameters
 async function searchApi(query, type, queryType) {
   clearMarkers();
@@ -85,6 +98,12 @@ async function searchApi(query, type, queryType) {
     if (!response.ok) throw new Error("Something went wrong");
 
     const breweryList = await response.json();
+
+      // Save the last search
+      lastSearches.push({query, type, queryType, results: breweryList});
+
+      // Display the last 5 searches
+      displayLastSearches();
 
     // Center the map to the first brewery's location
 
