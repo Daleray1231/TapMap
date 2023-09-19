@@ -1,6 +1,8 @@
 // Selecting HTML elements
 const resultContentEl = document.querySelector('.brewery_list ul');
 const searchFormEl = document.querySelector('#search-form');
+const lastSearches = [];
+
 
 // Initialize the map
 const map = L.map('mapid').setView([37.8, -96.9], 4); // Initialize centered on the US
@@ -50,6 +52,18 @@ function createCard(brewery) {
   resultContentEl.append(card);
 }
 
+// Function to display the last 5 searches
+function displayLastSearches(){
+  const lastSearchContainer = document.querySelector('#last-searches');
+  lastSearchContainer.innerHTML = '';
+
+  lastSearches.slice(-5).forEach(function(search, index){
+    const searchItem = document.createElement('div');
+    searchItem.textContent = `Search ${index + 1}: ${JSON.stringify(search)}`;
+    lastSearchContainer.appendChild(searchItem);
+  });
+}
+
 // Fetch brewery data based on search parameters
 async function searchApi(query, type, queryType) {
   const baseUrl = 'https://api.openbrewerydb.org/breweries';
@@ -61,6 +75,12 @@ async function searchApi(query, type, queryType) {
     if (!response.ok) throw new Error('Something went wrong');
 
     const breweryList = await response.json();
+
+      // Save the last search
+      lastSearches.push({query, type, queryType, results: breweryList});
+
+      // Display the last 5 searches
+      displayLastSearches();
 
     // Center the map to the first brewery's location
     if (breweryList.length > 0 && breweryList[0].latitude && breweryList[0].longitude) {
