@@ -10,6 +10,21 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
 }).addTo(map);
 
+// Define the custom beer icon image
+const beerIcon = L.icon({
+  iconUrl: 'assets/images/beermug2.png', // Replace with the actual URL or file path to your beer icon image
+  iconSize: [54, 54], // Set the size of the icon
+});
+
+// Define a variable to keep track of markers
+let markers = [];
+
+// Function to clear all markers from the map
+function clearMarkers() {
+  markers.forEach(marker => marker.remove());
+  markers = [];
+}
+
 // Create a card element for a brewery
 function createCard(brewery) {
   const card = document.createElement("li");
@@ -34,10 +49,10 @@ function createCard(brewery) {
 
   // to put a marker on the map for each brewery
   if (brewery.latitude && brewery.longitude) {
-    L.marker([brewery.latitude, brewery.longitude])
-      .addTo(map)
+    const marker = L.marker([brewery.latitude, brewery.longitude], { icon: beerIcon }).addTo(map)
       .bindPopup(`<b>${brewery.name}</b><br>Type: ${brewery.brewery_type}`)
       .openPopup();
+    markers.push(marker); // Add the marker to the markers array
   }
 
   cardBody.append(title, type, street, cityState);
@@ -56,6 +71,7 @@ function createCard(brewery) {
 
 // Fetch brewery data based on search parameters
 async function searchApi(query, type, queryType) {
+  clearMarkers();
   const baseUrl = "https://api.openbrewerydb.org/breweries";
   const queryParam = queryType === "postalCode" ? "by_postal" : "by_city";
   const apiUrl = `${baseUrl}?${queryParam}=${query}&by_type=${type}`;
@@ -74,13 +90,12 @@ async function searchApi(query, type, queryType) {
       breweryList[0].longitude
     ) {
       map.setView([breweryList[0].latitude, breweryList[0].longitude], 12);
-
     }
 
     // Error handling, invalid search
     if (!breweryList.length) {
       errorMessage.textContent =
-        "No breweries found.  Try searching for a different type of brewery or a different ZIP or city";
+        "No breweries found. Try searching for a different type of brewery or a different ZIP or city";
       errorMessage.style.color = "darkred";
       searchFormEl.after(errorMessage);
     } else {
