@@ -1,6 +1,7 @@
 // Selecting HTML elements
-const resultContentEl = document.querySelector(".brewery_list ul");
-const searchFormEl = document.querySelector("#search-form");
+const resultContentEl = document.querySelector('.brewery_list ul');
+const searchFormEl = document.querySelector('#search-form');
+const lastSearches = [];
 const errorMessage = document.createElement("h4");
 
 // Initialize the map
@@ -27,8 +28,12 @@ function clearMarkers() {
 
 // Create a card element for a brewery
 function createCard(brewery) {
+  // Create an ID based on the brewery name
+  const cardId = `brewery-${brewery.name.replace(/\s+/g, "-").toLowerCase()}`;
+
   const card = document.createElement("li");
   card.className = "card bg-light text-dark mb-3 p-3";
+  card.id = cardId; // Set the card's ID
 
   const cardBody = document.createElement("div");
   cardBody.className = "card-body";
@@ -40,24 +45,24 @@ function createCard(brewery) {
   street.textContent = brewery.street || "Street info not available";
 
   const cityState = document.createElement("p");
-  cityState.textContent = `${brewery.city || "City not available"}, ${
-    brewery.state || "State not available"
-  }`;
+  cityState.textContent = `${brewery.city || "City not available"}, ${brewery.state || "State not available"
+    }`;
 
   const type = document.createElement("p");
   type.textContent = `Type: ${brewery.brewery_type}`;
 
-    // to put a marker on the map for each brewery
-    if (brewery.latitude && brewery.longitude) {
-      const marker = L.marker([brewery.latitude, brewery.longitude], { icon: beerIcon }).addTo(map)
-        .bindPopup(`<b>${brewery.name}</b><br>Type: ${brewery.brewery_type}`);
-      markers.push(marker); // Add the marker to the markers array
-  
-      // Add a click event listener to open the popup when the marker is clicked
-      marker.on('click', function() {
-        this.openPopup();
-      });
-    }
+
+  // to put a marker on the map for each brewery
+  if (brewery.latitude && brewery.longitude) {
+    const marker = L.marker([brewery.latitude, brewery.longitude], { icon: beerIcon }).addTo(map)
+      .bindPopup(`<a href="#${cardId}"><b>${brewery.name}</b></a><br>Type: ${brewery.brewery_type}`);
+    markers.push(marker); // Add the marker to the markers array
+
+    // Add a click event listener to open the popup when the marker is clicked
+    marker.on('click', function () {
+      this.openPopup();
+    });
+  }
 
   cardBody.append(title, type, street, cityState);
   card.append(cardBody);
@@ -73,6 +78,18 @@ function createCard(brewery) {
   resultContentEl.append(card);
 }
 
+// Function to display the last 5 searches
+function displayLastSearches(){
+  const lastSearchContainer = document.querySelector('#last-searches');
+  lastSearchContainer.innerHTML = '';
+
+  lastSearches.slice(-5).forEach(function(search, index){
+    const searchItem = document.createElement('div');
+    searchItem.textContent = `Search ${index + 1}: ${JSON.stringify(search)}`;
+    lastSearchContainer.appendChild(searchItem);
+  });
+}
+
 // Fetch brewery data based on search parameters
 async function searchApi(query, type, queryType) {
   clearMarkers();
@@ -85,6 +102,12 @@ async function searchApi(query, type, queryType) {
     if (!response.ok) throw new Error("Something went wrong");
 
     const breweryList = await response.json();
+
+      // Save the last search
+      lastSearches.push({query, type, queryType, results: breweryList});
+
+      // Display the last 5 searches
+      displayLastSearches();
 
     // Center the map to the first brewery's location
 
