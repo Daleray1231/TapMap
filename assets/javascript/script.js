@@ -1,3 +1,4 @@
+document.addEventListener("DOMContentLoaded", function () {
 // Selecting HTML elements
 const resultContentEl = document.querySelector('.brewery_list ul');
 const searchFormEl = document.querySelector('#search-form');
@@ -79,16 +80,16 @@ function createCard(brewery) {
 }
 
 // Function to display the last 5 searches
-function displayLastSearches(){
-  const lastSearchContainer = document.querySelector('#last-searches');
-  lastSearchContainer.innerHTML = '';
+// function displayLastSearches() {
+//   const lastSearchContainer = document.querySelector('#last-searches');
+//   lastSearchContainer.innerHTML = '';
 
-  lastSearches.slice(-5).forEach(function(search, index){
-    const searchItem = document.createElement('div');
-    searchItem.textContent = `Search ${index + 1}: ${JSON.stringify(search)}`;
-    lastSearchContainer.appendChild(searchItem);
-  });
-}
+//   lastSearches.slice(-5).forEach(function (search, index) {
+//     const searchItem = document.createElement('div');
+//     searchItem.textContent = `Search ${index + 1}: ${JSON.stringify(search)}`;
+//     lastSearchContainer.appendChild(searchItem);
+//   });
+
 
 // Fetch brewery data based on search parameters
 async function searchApi(query, type, queryType) {
@@ -103,11 +104,11 @@ async function searchApi(query, type, queryType) {
 
     const breweryList = await response.json();
 
-      // Save the last search
-      lastSearches.push({query, type, queryType, results: breweryList});
+    // Save the last search
+    lastSearches.push({ query, type, queryType, results: breweryList });
 
-      // Display the last 5 searches
-      displayLastSearches();
+    // Display the last 5 searches
+    displayLastSearches();
 
     // Center the map to the first brewery's location
 
@@ -126,7 +127,10 @@ async function searchApi(query, type, queryType) {
       errorMessage.style.color = "darkred";
       searchFormEl.after(errorMessage);
     } else {
+      // Clear existing cards
       resultContentEl.innerHTML = "";
+
+      // Iterate through breweryList and create cards for each brewery
       breweryList.forEach(createCard);
     }
   } catch (error) {
@@ -164,3 +168,4 @@ function handleSearchFormSubmit(event) {
 }
 
 searchFormEl.addEventListener("submit", handleSearchFormSubmit);
+});
