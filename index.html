@@ -11,7 +11,6 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="./assets/css/style.css" />
-
   <style>
     .center {
       display: flex;
@@ -19,28 +18,55 @@
       align-items: center;
     }
   </style>
+  </head> 
+  <body>
+    <section class="hero small ">
+      <div class="hero small">
+        <div class="container">
+         <figure class="image center p-3 mt-0 mb-3">
+            <img src="assets/images/v3.png" style="max-width: 200px;">
+          </figure> 
+        <!--<h1 class="is-size-1 has-text-weight-bold has-text-success-dark has-text-centered p-4">TapMap</h1> -->
+      </div>
+    </section>
 
-</head>
+    <figure class="columns is-mobile is-variable is-0 grid-xl has-background-success-dark">
+      <div class="column">
+        <div class="image card">
+          <a><img src="assets/images/Hops.jpg"></a>
+        </div>
+      </div>
+      <div class="column">
+          <div class="image card">
+            <a><img src="assets/images/taps.jpg"></a>
+          </div>
+      </div>
+      <div class="column">
+          <div class="image card">
+            <a><img src="assets/images/wheat.jpg"></a>
+          </div>
+      </div>
+      <div class="column">
+        <div class="image card">
+          <a><img src="assets/images/malt-1.jpg"></a>
+        </div>
+      </div>
+    </figure>
 
-<body>
-  <div class="header center has-background-grey-light ">
-    <div class="p-5">
-      <h1 class="is-size-1 has-text-weight-bold has-text-success-dark has-text-centered">TapMap</h1>
-    </div>
-  </div>
-  <section class="hero is-size-3 is-dark">
-    <div class="hero-body">
-    </div>
-  </section>
+    <div class="section has-text-centered p-1 m-3">
+      
+        <p class="is-size-5 has-text-weight-bold has-text-dark ">Find A Brewery:</p>
+        <h3 class=""></h3>
+          <form id="search-form" class="">
+            <input id="search-input" class="" type="text" placeholder="City/Zip"/>
+        </h3>
   <div class="section has-text-centered">
     <p class="is-size-5 has-text-weight-bold has-text-dark ">Find A Brewery:</p>
     <h3 class=""></h3>
     <form id="search-form" class="">
       <input id="search-input" class="" type="text" placeholder="City/Zip" />
       </h3>
-
       <select id="format-input" class="pr-6 mb-3">
-
         <option value="" disabled selected>Filter By:</option>
         <option value="regional">Regional</option>
         <option value="large">Large</option>
@@ -49,23 +75,24 @@
         <!-- <option value="dog-friendly-brewery">Dog Friendly</option>
           <option value="brewery-tours">Offers Tours</option>   -->
       </select>
-      <br>
-      <button class="has-background-success-dark has-text-light p-2">Beer Me Up, Scotty!</button>
-    </form>
-  </div>
-  </div>
-
+        <br>
+          <button class="has-background-success-dark has-text-light p-2 mb-4">Beer Me Up, Scotty!</button>
+        </form>
+      </div>
+    </div>
   <section class="hero is-small is-dark">
     <div class="hero-body">
       <section class="search-history" style="background-color: red;">FOR JS TEAM - HISTORY HERE</section>
-
     </div>
   </section>
   <section class="mapContainer px-5 py-3 has-text-centered">
     <h2 class="is-size-3 has-text-weight-bold has-text-success-dark">MAP</h2>
   </section>
   <div class="card-image has-text-centered">
-
+          <div id="mapid" style="height: 350px; width: 100%;"></div> 
+          <div class="brewery_list px-5">
+            <ul> </ul>
+          </div>
     <div class="container">
       <div class="left-panel">
         <div class="brewery_list px-5">
