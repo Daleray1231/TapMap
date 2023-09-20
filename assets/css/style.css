@@ -1,0 +1,26 @@
+/* * Add this CSS to your existing stylesheet or in a <style> tag in your HTML */
+.container {
+    display: flex;
+    /* Use flexbox to create a row layout */
+}
+
+.left-panel {
+    flex: 1;
+    /* Allow the left panel (brewery cards) to grow to fill available space */
+    padding: 20px;
+    /* Add some padding for spacing */
+}
+
+.right-panel {
+    flex: 2;
+    /* Make the right panel (map) twice as wide as the left panel */
+    margin-left: 20px;
+    /* Add some margin to separate the panels */
+}
+
+#mapid {
+    height: 100%;
+    /* Adjust the map's height to fill the right panel */
+    width: 100%;
+    /* Adjust the map's width to fill the right panel */
+}
