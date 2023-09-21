@@ -24,6 +24,10 @@
     /* Adjust the map's width to fill the right panel */
 }
 
+.hero {
+    text-align: center;
+}
+
 /* CSS for Team Member images */
 .team-member-image {
     width: 150px; /* Set a fixed width for the images */
