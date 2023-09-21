@@ -1,32 +1,3 @@
-
-
-img {
-    min-width: 226px;
-    max-width: 226px;
-    width: 226px;
-    max-height: 226px;
-    height: 226px;
-    border-radius: 4px;
-}
- .member_links {
-    width: 350px;
-    max-height: 320px;
- }
-aside {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-a {
-    text-decoration: none;
-    color: #363636;
-}
-figure {
-    margin-top: 12px;
-}
-
-/* * Add this CSS to your existing stylesheet or in a <style> tag in your HTML */
 .container {
     display: flex;
     /* Use flexbox to create a row layout */
@@ -53,3 +24,23 @@ figure {
     /* Adjust the map's width to fill the right panel */
 }
 
+/* CSS for Team Member images */
+.team-member-image {
+    width: 150px; /* Set a fixed width for the images */
+    height: 150px; /* Set a fixed height for the images */
+    border-radius: 50%; /* Make the images circular */
+    object-fit: cover; /* Maintain image aspect ratio and cover the entire space */
+    margin-bottom: 10px; /* Add some bottom margin for spacing */
+  }
+  
+  /* CSS for evenly distributing Team Member tiles */
+  .team_container {
+    display: flex;
+    justify-content: space-between; /* Distribute tiles evenly */
+    flex-wrap: wrap; /* Allow tiles to wrap to the next row if needed */
+  }
+  
+  .team_member {
+    flex: 0 0 calc(20% - 20px); /* Set width for each tile (adjust as needed) */
+  }
+ 
