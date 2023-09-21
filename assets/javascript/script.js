@@ -34,6 +34,7 @@ function createCard(brewery) {
 
   const card = document.createElement("li");
   card.className = "card bg-light text-dark mb-3 p-3";
+  card.setAttribute('data-aos', 'flip-down'); 
   card.id = cardId; // Set the card's ID
 
   const cardBody = document.createElement("div");

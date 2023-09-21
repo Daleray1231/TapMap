@@ -24,6 +24,36 @@
     /* Adjust the map's width to fill the right panel */
 }
 
+.start-container {
+    display: inline-block;
+    border: 2px solid hsl(141, 53%, 21%); /* Darker than the button for contrast */
+    padding: 10px;
+    border-radius: 7px;
+    background-color: hsl(141, 53%, 21%); /* A bit darker for contrast */
+    box-shadow: inset 0 20px 4px -19px rgba(255, 255, 255, 0.7);
+}
+
+#custom-beer-button {
+    background: linear-gradient(to top, hsl(141, 53%, 31%), hsl(141, 53%, 25%));
+    color: white;
+    border: 2px solid hsl(141, 53%, 21%);
+    font-family: Barlow, sans-serif;
+    font-size: 23px;
+    width: 240px;
+    height: 75px;
+    box-shadow: inset 0 20px 4px -19px rgba(255, 255, 255, 0.4), 0 12px 12px 0 rgba(0, 0, 0, 0.3);
+}
+
+#custom-beer-button:hover {
+    background: linear-gradient(to bottom, hsl(141, 53%, 31%), hsl(141, 53%, 25%));
+}
+
+#custom-beer-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+
 .hero {
     text-align: center;
 }
