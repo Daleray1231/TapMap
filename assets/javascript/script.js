@@ -2,6 +2,7 @@
 const resultContentEl = document.querySelector('.brewery_list ul');
 const searchFormEl = document.querySelector('#search-form');
 const lastSearches = [];
+const maxSavedSearches = 5; //Maximum number of saved searches
 const errorMessage = document.createElement("h4");
 
 // Initialize the map
@@ -79,16 +80,28 @@ function createCard(brewery) {
 }
 
 // Function to display the last 5 searches
-function displayLastSearches(){
-  const lastSearchContainer = document.querySelector('#last-searches');
+function displayLastSearches() {
+  const lastSearchContainer = document.querySelector('.search-history');
   lastSearchContainer.innerHTML = '';
 
-  lastSearches.slice(-5).forEach(function(search, index){
+  const uniqueSearches = Array.from(new Set(lastSearches.map(function(search){
+    return search.query;
+  }))); // Remove duplicates
+  const recentSearches = uniqueSearches.slice(-maxSavedSearches);
+
+  localStorage.setItem('recentSeaches', JSON.stringify(recentSearches));
+
+  for (let i = Math.max(0, uniqueSearches.length - maxSavedSearches); i < uniqueSearches.length; i++) {
+    const search = uniqueSearches[i];
+
+    if (search !== undefined){
     const searchItem = document.createElement('div');
-    searchItem.textContent = `Search ${index + 1}: ${JSON.stringify(search)}`;
+    searchItem.textContent = `${search}`;
     lastSearchContainer.appendChild(searchItem);
-  });
+  }
+  }
 }
+
 
 // Fetch brewery data based on search parameters
 async function searchApi(query, type, queryType) {
@@ -104,7 +117,7 @@ async function searchApi(query, type, queryType) {
     const breweryList = await response.json();
 
       // Save the last search
-      lastSearches.push({query, type, queryType, results: breweryList});
+      lastSearches.push(query);
 
       // Display the last 5 searches
       displayLastSearches();
@@ -139,7 +152,7 @@ function handleSearchFormSubmit(event) {
   event.preventDefault();
 
   const searchInputBox = document.querySelector("#search-input");
-  const searchInputVal = document.querySelector("#search-input").value;
+  const searchInputVal = searchInputBox.value;
   const formatInputVal = document.querySelector("#format-input").value;
 
   if (!searchInputVal) {
@@ -149,6 +162,21 @@ function handleSearchFormSubmit(event) {
     // console.error("You need a search input value!");
     return;
   }
+
+    // save the search input (city or zip code)
+    
+    lastSearches.push({query: searchInputVal});
+
+    // Keep only the last 5 searches
+    if (lastSearches.length > maxSavedSearches){
+      lastSearches.shift();
+    }
+
+    //Display the last 5 searches
+    displayLastSearches();
+  
+
+
   if (searchInputVal) {
     searchInputBox.onfocus = function () {
       this.value = "";
@@ -157,10 +185,36 @@ function handleSearchFormSubmit(event) {
 
   }
 
+  // Check if the same search query already exists
+  let existingQuery = lastSearches.find(function(query){
+    return query.query === searchInputVal;
+  });
+  if (!existingQuery) {
+    lastSearches.push({query: searchInputVal});
+    if (lastSearches.lenth > maxSavedSearches){
+      lastSearches.shift();
+    }
+    displayLastSearches();
+  }
+
+
   const isPostalCode = /^\d+$/.test(searchInputVal);
   const queryType = isPostalCode ? "postalCode" : "city";
 
   searchApi(searchInputVal, formatInputVal, queryType);
+}
+
+// Load and display recent searches from local storage
+function displayRecentSearches() {
+  const recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
+  const lastSearchContainer = document.querySelector('.search-history');
+  lastSearchContainer.innerHTML = '';
+
+  for (const search of recentSearches) {
+    const searchItem = document.createElement('div');
+    searchItem.textContent = search;
+    lastSearchContainer.appendChild(searchItem);
+  }
 }
 
 searchFormEl.addEventListener("submit", handleSearchFormSubmit);
