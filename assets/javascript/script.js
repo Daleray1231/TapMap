@@ -1,6 +1,8 @@
 // Selecting HTML elements
-const resultContentEl = document.querySelector(".brewery_list ul");
-const searchFormEl = document.querySelector("#search-form");
+const resultContentEl = document.querySelector('.brewery_list ul');
+const searchFormEl = document.querySelector('#search-form');
+const lastSearches = [];
+const maxSavedSearches = 5; //Maximum number of saved searches
 const errorMessage = document.createElement("h4");
 
 // Initialize the map
@@ -27,8 +29,12 @@ function clearMarkers() {
 
 // Create a card element for a brewery
 function createCard(brewery) {
+  // Create an ID based on the brewery name
+  const cardId = `brewery-${brewery.name.replace(/\s+/g, "-").toLowerCase()}`;
+
   const card = document.createElement("li");
   card.className = "card bg-light text-dark mb-3 p-3";
+  card.id = cardId; // Set the card's ID
 
   const cardBody = document.createElement("div");
   cardBody.className = "card-body";
@@ -40,24 +46,24 @@ function createCard(brewery) {
   street.textContent = brewery.street || "Street info not available";
 
   const cityState = document.createElement("p");
-  cityState.textContent = `${brewery.city || "City not available"}, ${
-    brewery.state || "State not available"
-  }`;
+  cityState.textContent = `${brewery.city || "City not available"}, ${brewery.state || "State not available"
+    }`;
 
   const type = document.createElement("p");
   type.textContent = `Type: ${brewery.brewery_type}`;
 
-    // to put a marker on the map for each brewery
-    if (brewery.latitude && brewery.longitude) {
-      const marker = L.marker([brewery.latitude, brewery.longitude], { icon: beerIcon }).addTo(map)
-        .bindPopup(`<b>${brewery.name}</b><br>Type: ${brewery.brewery_type}`);
-      markers.push(marker); // Add the marker to the markers array
-  
-      // Add a click event listener to open the popup when the marker is clicked
-      marker.on('click', function() {
-        this.openPopup();
-      });
-    }
+
+  // to put a marker on the map for each brewery
+  if (brewery.latitude && brewery.longitude) {
+    const marker = L.marker([brewery.latitude, brewery.longitude], { icon: beerIcon }).addTo(map)
+      .bindPopup(`<a href="#${cardId}"><b>${brewery.name}</b></a><br>Type: ${brewery.brewery_type}`);
+    markers.push(marker); // Add the marker to the markers array
+
+    // Add a click event listener to open the popup when the marker is clicked
+    marker.on('click', function () {
+      this.openPopup();
+    });
+  }
 
   cardBody.append(title, type, street, cityState);
   card.append(cardBody);
@@ -73,6 +79,31 @@ function createCard(brewery) {
   resultContentEl.append(card);
 }
 
+// Function to display the last 5 searches
+function displayLastSearches() {
+  const lastSearchContainer = document.querySelector('.search-history');
+  lastSearchContainer.innerHTML = '';
+
+  const uniqueSearches = Array.from(new Set(lastSearches.map(function(search){
+    return search.query;
+  }))); // Remove duplicates
+  const recentSearches = uniqueSearches.slice(-maxSavedSearches);
+
+
+  localStorage.setItem('recentSeaches', JSON.stringify(recentSearches));
+
+  for (let i = Math.max(0, uniqueSearches.length - maxSavedSearches); i < uniqueSearches.length; i++) {
+    const search = uniqueSearches[i];
+
+    if (search !== undefined){
+    const searchItem = document.createElement('div');
+    searchItem.textContent = `${search}`;
+    lastSearchContainer.appendChild(searchItem);
+  }
+  }
+}
+
+
 // Fetch brewery data based on search parameters
 async function searchApi(query, type, queryType) {
   clearMarkers();
@@ -85,6 +116,12 @@ async function searchApi(query, type, queryType) {
     if (!response.ok) throw new Error("Something went wrong");
 
     const breweryList = await response.json();
+
+      // Save the last search
+      lastSearches.push(query);
+
+      // Display the last 5 searches
+      displayLastSearches();
 
     // Center the map to the first brewery's location
 
@@ -116,7 +153,7 @@ function handleSearchFormSubmit(event) {
   event.preventDefault();
 
   const searchInputBox = document.querySelector("#search-input");
-  const searchInputVal = document.querySelector("#search-input").value;
+  const searchInputVal = searchInputBox.value;
   const formatInputVal = document.querySelector("#format-input").value;
 
   if (!searchInputVal) {
@@ -126,6 +163,21 @@ function handleSearchFormSubmit(event) {
     // console.error("You need a search input value!");
     return;
   }
+
+    // save the search input (city or zip code)
+    
+    lastSearches.push({query: searchInputVal});
+
+    // Keep only the last 5 searches
+    if (lastSearches.length > maxSavedSearches){
+      lastSearches.shift();
+    }
+
+    //Display the last 5 searches
+    displayLastSearches();
+  
+
+
   if (searchInputVal) {
     searchInputBox.onfocus = function () {
       this.value = "";
@@ -134,10 +186,36 @@ function handleSearchFormSubmit(event) {
 
   }
 
+  // Check if the same search query already exists
+  let existingQuery = lastSearches.find(function(query){
+    return query.query === searchInputVal;
+  });
+  if (!existingQuery) {
+    lastSearches.push({query: searchInputVal});
+    if (lastSearches.length > maxSavedSearches){
+      lastSearches.shift();
+    }
+    displayLastSearches();
+  }
+
+
   const isPostalCode = /^\d+$/.test(searchInputVal);
   const queryType = isPostalCode ? "postalCode" : "city";
 
   searchApi(searchInputVal, formatInputVal, queryType);
+}
+
+// Load and display recent searches from local storage
+function displayRecentSearches() {
+  const recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
+  const lastSearchContainer = document.querySelector('.search-history');
+  lastSearchContainer.innerHTML = '';
+
+  for (const search of recentSearches) {
+    const searchItem = document.createElement('div');
+    searchItem.textContent = search;
+    lastSearchContainer.appendChild(searchItem);
+  }
 }
 
 searchFormEl.addEventListener("submit", handleSearchFormSubmit);
