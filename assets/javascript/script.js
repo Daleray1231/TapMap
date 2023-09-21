@@ -29,8 +29,12 @@ function clearMarkers() {
 
 // Create a card element for a brewery
 function createCard(brewery) {
+  // Create an ID based on the brewery name
+  const cardId = `brewery-${brewery.name.replace(/\s+/g, "-").toLowerCase()}`;
+
   const card = document.createElement("li");
   card.className = "card bg-light text-dark mb-3 p-3";
+  card.id = cardId; // Set the card's ID
 
   const cardBody = document.createElement("div");
   cardBody.className = "card-body";
@@ -42,24 +46,24 @@ function createCard(brewery) {
   street.textContent = brewery.street || "Street info not available";
 
   const cityState = document.createElement("p");
-  cityState.textContent = `${brewery.city || "City not available"}, ${
-    brewery.state || "State not available"
-  }`;
+  cityState.textContent = `${brewery.city || "City not available"}, ${brewery.state || "State not available"
+    }`;
 
   const type = document.createElement("p");
   type.textContent = `Type: ${brewery.brewery_type}`;
 
-    // to put a marker on the map for each brewery
-    if (brewery.latitude && brewery.longitude) {
-      const marker = L.marker([brewery.latitude, brewery.longitude], { icon: beerIcon }).addTo(map)
-        .bindPopup(`<b>${brewery.name}</b><br>Type: ${brewery.brewery_type}`);
-      markers.push(marker); // Add the marker to the markers array
-  
-      // Add a click event listener to open the popup when the marker is clicked
-      marker.on('click', function() {
-        this.openPopup();
-      });
-    }
+
+  // to put a marker on the map for each brewery
+  if (brewery.latitude && brewery.longitude) {
+    const marker = L.marker([brewery.latitude, brewery.longitude], { icon: beerIcon }).addTo(map)
+      .bindPopup(`<a href="#${cardId}"><b>${brewery.name}</b></a><br>Type: ${brewery.brewery_type}`);
+    markers.push(marker); // Add the marker to the markers array
+
+    // Add a click event listener to open the popup when the marker is clicked
+    marker.on('click', function () {
+      this.openPopup();
+    });
+  }
 
   cardBody.append(title, type, street, cityState);
   card.append(cardBody);
