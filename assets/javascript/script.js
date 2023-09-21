@@ -89,6 +89,7 @@ function displayLastSearches() {
   }))); // Remove duplicates
   const recentSearches = uniqueSearches.slice(-maxSavedSearches);
 
+
   localStorage.setItem('recentSeaches', JSON.stringify(recentSearches));
 
   for (let i = Math.max(0, uniqueSearches.length - maxSavedSearches); i < uniqueSearches.length; i++) {
@@ -191,7 +192,7 @@ function handleSearchFormSubmit(event) {
   });
   if (!existingQuery) {
     lastSearches.push({query: searchInputVal});
-    if (lastSearches.lenth > maxSavedSearches){
+    if (lastSearches.length > maxSavedSearches){
       lastSearches.shift();
     }
     displayLastSearches();
