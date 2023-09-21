@@ -1,57 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<!-- Title -->
-		<title>TapMap</title>
+    <!-- Title -->
+    <title>TapMap</title>
 
-		<!-- Stylesheets -->
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-		<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
-		<link rel="stylesheet" href="./assets/css/style.css" />
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css" />
 
-		<!-- Scripts -->
-		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
-		<!-- Inline Styles -->
-		<style>
-			.center {
-			  display: flex;
-			  justify-content: center;
-			  align-items: center;
-			}
-		</style>
-	</head>
+    <!-- Inline Styles -->
+    <style>
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    body {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    </style>
+  </head>
 
-	<body>
-		<!-- Hero Section -->
-		<section class="hero small">
-			<div class="container">
-				<figure class="image center p-3 mt-0 mb-3">
-					<img src="assets/images/v3.png" style="max-width: 200px;" />
-				</figure>
-			</div>
-		</section>
+  <body>
+    <!-- Hero Section -->
+    <section class="hero small ">
+        <div class="container">
+          <figure class="image center p-3 mt-0 mb-3">
+            <img src="assets/images/TM_v1.png" style="max-width: 300px;">
+          </figure> 
+        </div>
+    </section>
 
-		<!-- Image Cards -->
-		<figure class="columns is-mobile is-variable is-0 grid-xl has-background-success-dark">
-			<div class="column">
+    <!-- Image Cards -->
+    <figure class="columns is-mobile is-variable is-1 grid-xl has-background-success-dark">
+      <div class="column">
 				<div class="image card" data-aos="slide-right" data-aos-delay="0">
-					<a><img src="assets/images/Hops.jpg" /></a>
-				</div>
-			</div>
-			<div class="column">
-				<div class="image card" data-aos="slide-right" data-aos-delay="200">
 					<a><img src="assets/images/taps.jpg" /></a>
 				</div>
 			</div>
 			<div class="column">
+				<div class="image card" data-aos="slide-right" data-aos-delay="200">
+					<a><img src="assets/images/wheat-1.jpg" /></a>
+				</div>
+			</div>
+			<div class="column">
 				<div class="image card" data-aos="slide-right" data-aos-delay="400">
-					<a><img src="assets/images/wheat.jpg" /></a>
+					<a><img src="assets/images/hops-1.jpg" /></a>
 				</div>
 			</div>
 			<div class="column">
@@ -59,21 +61,37 @@
 					<a><img src="assets/images/malt-1.jpg" /></a>
 				</div>
 			</div>
+            <div class="column">
+				<div class="image card" data-aos="slide-right" data-aos-delay="800">
+					<a><img src="assets/images/Water.jpg" /></a>
+				</div>
+			</div>
+            <div class="column">
+				<div class="image card" data-aos="slide-right" data-aos-delay="1000">
+					<a><img src="assets/images/yeast.jpg" /></a>
+				</div>
+			</div>
+            <div class="column">
+				<div class="image card" data-aos="slide-right" data-aos-delay="1200">
+					<a><img src="assets/images/brite_tank.jpg" /></a>
+				</div>
+			</div>
 		</figure>
-		<!-- Brewery Search Form -->
-		<div class="section has-text-centered">
-      <p class="is-size-5 has-text-weight-bold has-text-dark" data-aos="fade-down" data-aos-delay="1200">Find A Brewery:</p> 
+    
+    <!-- Brewery Search Form -->
+    <div class="section has-text-centered">
+      <p class="is-size-2 has-text-weight-bold has-text-dark" data-aos="fade-down" data-aos-delay="1200">Find A Brewery:</p> 
       
       <form id="search-form">
           <div class="inline-elements"> <!-- New div to hold the inline elements -->
               <!-- Input animation -->
               <div style="display: inline-block;" data-aos="fade-right" data-aos-delay="1200">
-                  <input id="search-input" type="text" placeholder="City/Zip">
+                  <input id="search-input" class="is-size-6 p-1 mb-4" type="text" placeholder="City/Zip">
               </div>
   
               <!-- Filter animation -->
               <div style="display: inline-block;" data-aos="fade-left" data-aos-delay="1200">
-                  <select id="format-input" class="pr-6 mb-3">
+                  <select id="format-input" class="is-size-6 pr-6 p-1">
                       <option value="" disabled selected>Filter By:</option>
                       <option value="regional">Regional</option>
                       <option value="large">Large</option>
@@ -82,22 +100,24 @@
                   </select>
               </div>
           </div> <!-- End of inline-elements div -->
-          
-          <!-- Button -->
-          <button type="submit" class="has-background-success-dark has-text-light p-2" data-aos="fade-up" data-aos-delay="1200">Beer Me Up, Scotty!</button>
+
+         <!-- Button -->
+         <button type="submit" class="is-size-6 has-background-success-dark has-text-light p-3" data-aos="fade-up" data-aos-delay="1200">Beer Me Up, Scotty!</button>
       </form>
   </div>
-  
-		<!-- Search History and Map -->
+
+    <!-- Search History and Map -->
 		<section class="hero is-small is-dark">
 			<div class="hero-body"><section class="search-history" style="background-color: red;">FOR JS TEAM - HISTORY HERE</section></div>
 		</section>
-		<section class="mapContainer px-5 py-3 has-text-centered" data-aos="fade-in">
-			<h2 class="is-size-3 has-text-weight-bold has-text-success-dark">MAP</h2>
+		<section class="mapContainer px-5 py-3 mb-5 has-text-centered" data-aos="fade-in">
+			<h2 class="is-size-2 has-text-weight-bold has-text-dark">MAP</h2>
 			<div id="mapid" style="height: 350px; width: 100%;" data-aos="fade-in" data-aos-delay="1800"></div>
 		</section>
-		<!-- Team Members -->
-		<section class="team_container center has-background-success-dark">
+
+    <!-- Team Members -->
+		<section class="team_container center has-background-success-dark mb-5">
+
 			<!-- Daleray1231 -->
 			<div class="team_member tile is-parent center">
 				<aside class="member_links is-child notification is-info"data-aos="fade-in" data-aos-delay="1000">
@@ -149,14 +169,24 @@
 				</aside>
 			</div>
 		</section>
+
+     <!-- Hero Class -->
+     <section class="hero is-dark is-small mt-5">
+      <div class="hero-body">
+        <div class="container">
+        </div>
+      </div>
+    </section>
+    
 		<!-- Footer -->
-		<footer class="footer center p-3 has-background-grey-light">
+		<footer class="footer center p-3">
 			<div class="content">
 				<h4 class="has-text-dark center">Copyright 2023 Team TapMap</h4>
 				<h5 class="has-text-success-dark">🍺 Cheers! Prost! Sláinte! Saúde! Şerefe! ¡Salud! Santé! Skål! Kāmau! 🍺</h5>
 			</div>
 		</footer>
 		<script src="./assets/javascript/script.js"></script>
+    
     <!-- AOL.js -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
@@ -169,3 +199,4 @@ AOS.init({
 </script>
 	</body>
 </html>
+
