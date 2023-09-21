@@ -89,7 +89,8 @@ function displayLastSearches() {
   }))); // Remove duplicates
   const recentSearches = uniqueSearches.slice(-maxSavedSearches);
 
-  localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+
+  localStorage.setItem('recentSeaches', JSON.stringify(recentSearches));
 
   for (let i = Math.max(0, uniqueSearches.length - maxSavedSearches); i < uniqueSearches.length; i++) {
     const search = uniqueSearches[i];
