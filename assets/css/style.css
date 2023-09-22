@@ -22,6 +22,8 @@
     /* Adjust the map's height to fill the right panel */
     width: 100%;
     /* Adjust the map's width to fill the right panel */
+    border-radius: 7px;
+
 }
 
 .start-container {
@@ -106,6 +108,9 @@ figure {
     margin-top: 12px;
 }
 
+h5{
+    text-align: center;
+
 /* CSS for tablet-size screens or smaller */
 @media (max-width: 768px) {
     .container {
@@ -122,4 +127,5 @@ figure {
     #mapid {
         height: 300px; /* Adjust the map's height for smaller screens */
     }
+
 }
