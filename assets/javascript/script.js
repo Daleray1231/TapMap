@@ -14,7 +14,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 // Define the custom beer icon image
 const beerIcon = L.icon({
-  iconUrl: './assets/images/beermug2.png', // Replace with the actual URL or file path to your beer icon image
+  iconUrl: 'https://img.icons8.com/stickers/100/beer.png', // Replace with the actual URL or file path to your beer icon image
   iconSize: [54, 54], // Set the size of the icon
 });
 
