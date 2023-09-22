@@ -1,6 +1,6 @@
 # TapMap
 
-This application helps users locate breweries by city or zip code. With a drop down function that will allow the user to search specifically, they are able to search for large breweries, microbreweries, brewpubs, breweries that offer tours, and breweries that are dog friendly. The results will display a map with exact locations, the breweries names and website. 
+This application helps users locate breweries by city or zip code. With a drop down function that will allow the user to search specifically, they are able to search for micro breweries, brewpubs, large breweries, and regional breweries. The results will display a map with exact locations, the breweries names and website. 
 
 The application also introduces the TapMap team and provides the opportunity to contact members if desired. 
 
@@ -18,6 +18,9 @@ The application was designed based on the following criteria:
 - JavaScript
 - [Bulma: CSS Framework](https://bulma.io/ "Bulma: CSS Framework") - A free, open source framework that provides ready-to use 
   frontend components for building responsive web interfaces. 
+- [Dreamstime: Stock Photos](https://www.dreamstime.com/stock-photos/ "Dreamstime: Stock Photos") - An online royalty-free 
+  microstock provider.
+- [Vecteezy: Stock Photos](https://www.vecteezy.com/ "Vecteezy: Stock Photos") - An online marketplace for stock photos. 
 - [ClickUp: Project Management](https://clickup.com/ "ClickUp: Project Management") - A free program management tool that 
   provides whiteboards and other workspaces to streamline work flow.  
 - [Open Street Maps API](https://www.openstreetmap.org/ "Open Street Maps API") - A map of the world, free to use under an 
@@ -34,7 +37,7 @@ The application was designed based on the following criteria:
 ## Collaborators
 - Christi Tugwell - CSS, README.md
 - Cimarron Jenschke - Javascript, APIs
-- Clayton Guerrero - HTML, APIs
+- Clayton Guerrero - HTML, CSS, APIs
 - Dale Haynie - CSS, APIs
 - David Gray - Javascript, APIs, CSS Animations
 

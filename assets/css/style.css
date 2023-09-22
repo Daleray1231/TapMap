@@ -107,6 +107,25 @@ a {
 figure {
     margin-top: 12px;
 }
+
 h5{
     text-align: center;
+
+/* CSS for tablet-size screens or smaller */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column-reverse; /* Change to a column layout and reverse the order */
+    }
+
+    .left-panel,
+    .right-panel {
+        flex: auto; /* Allow both panels to take up the available space */
+        width: 100%; /* Make them full width */
+        margin: 0; /* Remove margin between panels */
+    }
+
+    #mapid {
+        height: 300px; /* Adjust the map's height for smaller screens */
+    }
+
 }
