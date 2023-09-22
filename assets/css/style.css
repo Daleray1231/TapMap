@@ -109,7 +109,8 @@ figure {
 }
 
 h5{
-    text-align: center;
+    text-align: center; 
+}
 
 /* CSS for tablet-size screens or smaller */
 @media (max-width: 768px) {
