@@ -89,6 +89,7 @@ function createCard(brewery) {
     website.href = brewery.website_url; // set the href attribute
     website.textContent = "Visit Website"; // set the link text
     website.target = "_blank"; // open in new tab
+    website.style.color = "blue"; // Set the text color to blue
     cardBody.append(website); // append the website link to card body
   }
 
