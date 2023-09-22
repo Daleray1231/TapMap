@@ -104,6 +104,10 @@ function displayLastSearches() {
   }
 }
 
+function fitMapToMarkers() {
+  const group = new L.featureGroup(markers);
+  map.fitBounds(group.getBounds());
+}
 
 // Fetch brewery data based on search parameters
 async function searchApi(query, type, queryType) {
@@ -124,15 +128,20 @@ async function searchApi(query, type, queryType) {
       // Display the last 5 searches
       displayLastSearches();
 
+       // Add markers to the map
+    breweryList.forEach(createCard);
+    
+    // Fit the map to show all markers
+    fitMapToMarkers();
+    
     // Center the map to the first brewery's location
-
-    if (
-      breweryList.length > 0 &&
-      breweryList[0].latitude &&
-      breweryList[0].longitude
-    ) {
-      map.setView([breweryList[0].latitude, breweryList[0].longitude], 12);
-    }
+    // if (
+    //   breweryList.length > 0 &&
+    //   breweryList[0].latitude &&
+    //   breweryList[0].longitude
+    // ) {
+    //   map.setView([breweryList[0].latitude, breweryList[0].longitude], 12);
+    // }
 
     // Error handling, invalid search
     if (!breweryList.length) {
