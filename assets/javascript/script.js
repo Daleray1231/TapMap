@@ -207,10 +207,25 @@ function handleSearchFormSubmit(event) {
 }
 
 // Load and display recent searches from local storage
+window.addEventListener('load', function(){
+  displayRecentSearches();
+});
+
 function displayRecentSearches() {
   const recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
   const lastSearchContainer = document.querySelector('.search-history');
   lastSearchContainer.innerHTML = '';
+
+  // Determine how many searches to display (maximum 5)
+  const numberToShow = Math.min(recentSearches.length, 5);
+
+  // Show the last 5 searches or all if there are fewer than 5
+  for (let i = recentSearches.length - numberToShow; i < recentSearches.length; i++){
+    const search = recentSearches[i];
+    const searchItem = document.createElement('div');
+    searchItem.textContent = search;
+    searchItem.classList.add('search-item');
+  }
 
   for (const search of recentSearches) {
     const searchItem = document.createElement('div');
