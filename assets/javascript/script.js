@@ -5,6 +5,21 @@ const lastSearches = [];
 const maxSavedSearches = 5; //Maximum number of saved searches
 const errorMessage = document.createElement("h4");
 
+// Function to scroll to the search history section
+function scrollToSearchHistory() {
+  const searchHistorySection = document.querySelector('.search-history');
+  if (searchHistorySection) {
+    const heroBody = searchHistorySection.closest('.hero-body');
+    if (heroBody) {
+      heroBody.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+}
+
+// Add an event listener to the custom beer button
+const customBeerButton = document.querySelector('#custom-beer-button');
+customBeerButton.addEventListener('click', scrollToSearchHistory);
+
 // Initialize the map
 const map = L.map("mapid").setView([37.8, -96.9], 4); // Initialize centered on the US
 
@@ -174,6 +189,11 @@ function handleSearchFormSubmit(event) {
     return;
   }
 
+  // Load and display recent searches from local storage
+window.addEventListener('load', function () {
+  displayRecentSearches();
+});
+
     // save the search input (city or zip code)
     
     lastSearches.push({query: searchInputVal});
@@ -219,6 +239,8 @@ function handleSearchFormSubmit(event) {
 window.addEventListener('load', function(){
   displayRecentSearches();
 });
+
+searchFormEl.addEventListener("submit", handleSearchFormSubmit);
 
 function displayRecentSearches() {
   const recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
