@@ -1,0 +1,132 @@
+.container {
+    display: flex;
+    /* Use flexbox to create a row layout */
+}
+
+.left-panel {
+    flex: 1;
+    /* Allow the left panel (brewery cards) to grow to fill available space */
+    padding: 20px;
+    /* Add some padding for spacing */
+}
+
+.right-panel {
+    flex: 2;
+    /* Make the right panel (map) twice as wide as the left panel */
+    margin-left: 20px;
+    /* Add some margin to separate the panels */
+}
+
+#mapid {
+    height: 100%;
+    /* Adjust the map's height to fill the right panel */
+    width: 100%;
+    /* Adjust the map's width to fill the right panel */
+    border-radius: 7px;
+
+}
+
+.start-container {
+    display: inline-block;
+    border: 2px solid hsl(141, 53%, 21%); /* Darker than the button for contrast */
+    padding: 10px;
+    border-radius: 7px;
+    background-color: hsl(141, 53%, 21%); /* A bit darker for contrast */
+    box-shadow: inset 0 20px 4px -19px rgba(255, 255, 255, 0.7);
+}
+
+#custom-beer-button {
+    background: linear-gradient(to top, hsl(141, 53%, 31%), hsl(141, 53%, 25%));
+    color: white;
+    border: 2px solid hsl(141, 53%, 21%);
+    font-family: Barlow, sans-serif;
+    font-size: 23px;
+    width: 240px;
+    height: 75px;
+    box-shadow: inset 0 20px 4px -19px rgba(255, 255, 255, 0.4), 0 12px 12px 0 rgba(0, 0, 0, 0.3);
+}
+
+#custom-beer-button:hover {
+    background: linear-gradient(to bottom, hsl(141, 53%, 31%), hsl(141, 53%, 25%));
+}
+
+#custom-beer-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+
+.hero {
+    text-align: center;
+}
+
+/* CSS for Team Member images */
+.team-member-image {
+    width: 150px; /* Set a fixed width for the images */
+    height: 150px; /* Set a fixed height for the images */
+    border-radius: 50%; /* Make the images circular */
+    object-fit: cover; /* Maintain image aspect ratio and cover the entire space */
+    margin-bottom: 10px; /* Add some bottom margin for spacing */
+  }
+
+  /* CSS for evenly distributing Team Member tiles */
+  .team_container {
+    display: flex;
+    justify-content: space-between; /* Distribute tiles evenly */
+    flex-wrap: wrap; /* Allow tiles to wrap to the next row if needed */
+  }
+
+  .team_member {
+    flex: 0 0 calc(20% - 20px); /* Set width for each tile (adjust as needed) */
+  }
+
+
+/* added css for members (pre-fixSearchResults) */
+.team-member-image {
+    min-width: 226px;
+    max-width: 226px;
+    width: 226px;
+    max-height: 226px;
+    height: 226px;
+    /* border-radius: 4px; */
+}
+ .member_links {
+    width: 350px;
+    max-height: 320px;
+ }
+aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+a {
+    text-decoration: none;
+    color: #363636;
+}
+figure {
+    margin-top: 12px;
+}
+
+h5{
+    text-align: center; 
+}
+
+/* CSS for tablet-size screens or smaller */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column-reverse; /* Change to a column layout and reverse the order */
+    }
+
+    .left-panel,
+    .right-panel {
+        flex: auto; /* Allow both panels to take up the available space */
+        width: 100%; /* Make them full width */
+        margin: 0; /* Remove margin between panels */
+    }
+
+    #mapid {
+        height: 300px; /* Adjust the map's height for smaller screens */
+    }
+
+}
