@@ -1,24 +1,24 @@
 // Selecting HTML elements
-const resultContentEl = document.querySelector('.brewery_list ul');
-const searchFormEl = document.querySelector('#search-form');
+const resultContentEl = document.querySelector(".brewery_list ul");
+const searchFormEl = document.querySelector("#search-form");
 const lastSearches = [];
 const maxSavedSearches = 5; //Maximum number of saved searches
 const errorMessage = document.createElement("h4");
 
 // Function to scroll to the search history section
 function scrollToSearchHistory() {
-  const searchHistorySection = document.querySelector('.search-history');
+  const searchHistorySection = document.querySelector(".search-history");
   if (searchHistorySection) {
-    const heroBody = searchHistorySection.closest('.hero-body');
+    const heroBody = searchHistorySection.closest(".hero-body");
     if (heroBody) {
-      heroBody.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      heroBody.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
 }
 
 // Add an event listener to the custom beer button
-const customBeerButton = document.querySelector('#custom-beer-button');
-customBeerButton.addEventListener('click', scrollToSearchHistory);
+const customBeerButton = document.querySelector("#custom-beer-button");
+customBeerButton.addEventListener("click", scrollToSearchHistory);
 
 // Initialize the map
 const map = L.map("mapid").setView([37.8, -96.9], 4); // Initialize centered on the US
@@ -29,7 +29,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 // Define the custom beer icon image
 const beerIcon = L.icon({
-  iconUrl: 'https://img.icons8.com/stickers/100/beer.png', // Replace with the actual URL or file path to your beer icon image
+  iconUrl: "https://img.icons8.com/stickers/100/beer.png",
   iconSize: [54, 54], // Set the size of the icon
 });
 
@@ -38,7 +38,7 @@ let markers = [];
 
 // Function to clear all markers from the map
 function clearMarkers() {
-  markers.forEach(marker => marker.remove());
+  markers.forEach((marker) => marker.remove());
   markers = [];
 }
 
@@ -49,7 +49,7 @@ function createCard(brewery) {
 
   const card = document.createElement("li");
   card.className = "card bg-light text-dark mb-3 p-3";
-  card.setAttribute('data-aos', 'flip-down'); 
+  card.setAttribute("data-aos", "flip-down");
   card.id = cardId; // Set the card's ID
 
   const cardBody = document.createElement("div");
@@ -62,21 +62,26 @@ function createCard(brewery) {
   street.textContent = brewery.street || "Street info not available";
 
   const cityState = document.createElement("p");
-  cityState.textContent = `${brewery.city || "City not available"}, ${brewery.state || "State not available"
-    }`;
+  cityState.textContent = `${brewery.city || "City not available"}, ${
+    brewery.state || "State not available"
+  }`;
 
   const type = document.createElement("p");
   type.textContent = `Type: ${brewery.brewery_type}`;
 
-
-  // to put a marker on the map for each brewery
+  // Put a marker on the map for each brewery
   if (brewery.latitude && brewery.longitude) {
-    const marker = L.marker([brewery.latitude, brewery.longitude], { icon: beerIcon }).addTo(map)
-      .bindPopup(`<a href="#${cardId}"><b>${brewery.name}</b></a><br>Type: ${brewery.brewery_type}`);
+    const marker = L.marker([brewery.latitude, brewery.longitude], {
+      icon: beerIcon,
+    })
+      .addTo(map)
+      .bindPopup(
+        `<a href="#${cardId}"><b>${brewery.name}</b></a><br>Type: ${brewery.brewery_type}`
+      );
     markers.push(marker); // Add the marker to the markers array
 
     // Add a click event listener to open the popup when the marker is clicked
-    marker.on('click', function () {
+    marker.on("click", function () {
       this.openPopup();
     });
   }
@@ -97,25 +102,34 @@ function createCard(brewery) {
 
 // Function to display the last 5 searches
 function displayLastSearches() {
-  const lastSearchContainer = document.querySelector('.search-history');
-  lastSearchContainer.innerHTML = '';
+  const lastSearchContainer = document.querySelector(".search-history");
+  lastSearchContainer.innerHTML = "";
 
-  const uniqueSearches = Array.from(new Set(lastSearches.map(function(search){
-    return search.query;
-  }))); // Remove duplicates
+  // Remove duplicate searches and get the most recent ones
+  const uniqueSearches = Array.from(
+    new Set(
+      lastSearches.map(function (search) {
+        return search.query;
+      })
+    )
+  );
   const recentSearches = uniqueSearches.slice(-maxSavedSearches);
 
+  // Store the recent searches in local storage
+  localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
 
-  localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
-
-  for (let i = Math.max(0, uniqueSearches.length - maxSavedSearches); i < uniqueSearches.length; i++) {
+  for (
+    let i = Math.max(0, uniqueSearches.length - maxSavedSearches);
+    i < uniqueSearches.length;
+    i++
+  ) {
     const search = uniqueSearches[i];
 
-    if (search !== undefined){
-    const searchItem = document.createElement('div');
-    searchItem.textContent = `${search}`;
-    lastSearchContainer.appendChild(searchItem);
-  }
+    if (search !== undefined) {
+      const searchItem = document.createElement("div");
+      searchItem.textContent = `${search}`;
+      lastSearchContainer.appendChild(searchItem);
+    }
   }
 }
 
@@ -137,26 +151,17 @@ async function searchApi(query, type, queryType) {
 
     const breweryList = await response.json();
 
-      // Save the last search
-      lastSearches.push(query);
+    // Save the last search
+    lastSearches.push(query);
 
-      // Display the last 5 searches
-      displayLastSearches();
+    // Display the last 5 searches
+    displayLastSearches();
 
-       // Add markers to the map
+    // Add markers to the map
     breweryList.forEach(createCard);
-    
+
     // Fit the map to show all markers
     fitMapToMarkers();
-    
-    // Center the map to the first brewery's location
-    // if (
-    //   breweryList.length > 0 &&
-    //   breweryList[0].latitude &&
-    //   breweryList[0].longitude
-    // ) {
-    //   map.setView([breweryList[0].latitude, breweryList[0].longitude], 12);
-    // }
 
     // Error handling, invalid search
     if (!breweryList.length) {
@@ -185,49 +190,44 @@ function handleSearchFormSubmit(event) {
     errorMessage.textContent = "You need a search input value!";
     errorMessage.style.color = "darkred";
     searchFormEl.after(errorMessage);
-    // console.error("You need a search input value!");
     return;
   }
 
   // Load and display recent searches from local storage
-window.addEventListener('load', function () {
-  displayRecentSearches();
-});
+  window.addEventListener("load", function () {
+    displayRecentSearches();
+  });
 
-    // save the search input (city or zip code)
-    
-    lastSearches.push({query: searchInputVal});
+  // save the search input (city or zip code)
 
-    // Keep only the last 5 searches
-    if (lastSearches.length > maxSavedSearches){
-      lastSearches.shift();
-    }
+  lastSearches.push({ query: searchInputVal });
 
-    //Display the last 5 searches
-    displayLastSearches();
-  
+  // Keep only the last 5 searches
+  if (lastSearches.length > maxSavedSearches) {
+    lastSearches.shift();
+  }
 
+  //Display the last 5 searches
+  displayLastSearches();
 
   if (searchInputVal) {
     searchInputBox.onfocus = function () {
       this.value = "";
-      errorMessage.remove()
+      errorMessage.remove();
     };
-
   }
 
   // Check if the same search query already exists
-  let existingQuery = lastSearches.find(function(query){
+  let existingQuery = lastSearches.find(function (query) {
     return query.query === searchInputVal;
   });
   if (!existingQuery) {
-    lastSearches.push({query: searchInputVal});
-    if (lastSearches.length > maxSavedSearches){
+    lastSearches.push({ query: searchInputVal });
+    if (lastSearches.length > maxSavedSearches) {
       lastSearches.shift();
     }
     displayLastSearches();
   }
-
 
   const isPostalCode = /^\d+$/.test(searchInputVal);
   const queryType = isPostalCode ? "postalCode" : "city";
@@ -236,30 +236,35 @@ window.addEventListener('load', function () {
 }
 
 // Load and display recent searches from local storage
-window.addEventListener('load', function(){
+window.addEventListener("load", function () {
   displayRecentSearches();
 });
 
 searchFormEl.addEventListener("submit", handleSearchFormSubmit);
 
 function displayRecentSearches() {
-  const recentSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
-  const lastSearchContainer = document.querySelector('.search-history');
-  lastSearchContainer.innerHTML = '';
+  const recentSearches =
+    JSON.parse(localStorage.getItem("recentSearches")) || [];
+  const lastSearchContainer = document.querySelector(".search-history");
+  lastSearchContainer.innerHTML = "";
 
   // Determine how many searches to display (maximum 5)
   const numberToShow = Math.min(recentSearches.length, 5);
 
   // Show the last 5 searches or all if there are fewer than 5
-  for (let i = recentSearches.length - numberToShow; i < recentSearches.length; i++){
+  for (
+    let i = recentSearches.length - numberToShow;
+    i < recentSearches.length;
+    i++
+  ) {
     const search = recentSearches[i];
-    const searchItem = document.createElement('div');
+    const searchItem = document.createElement("div");
     searchItem.textContent = search;
-    searchItem.classList.add('search-item');
+    searchItem.classList.add("search-item");
   }
 
   for (const search of recentSearches) {
-    const searchItem = document.createElement('div');
+    const searchItem = document.createElement("div");
     searchItem.textContent = search;
     lastSearchContainer.appendChild(searchItem);
   }
