@@ -60,6 +60,16 @@
     text-align: center;
 }
 
+.search-history {
+    display: flex;
+   justify-content: center; /* Center items horizontally */
+    flex-wrap: wrap; /* Allows items to wrap to next row */
+}
+
+.search-history div {
+    margin: 5px; /* Added space between the displayed saved searches */
+}
+
 /* CSS for Team Member images */
 .team-member-image {
     width: 150px; /* Set a fixed width for the images */
