@@ -18,11 +18,11 @@ The application was designed based on the following criteria:
 - JavaScript
 - [Bulma: CSS Framework](https://bulma.io/ "Bulma: CSS Framework") - A free, open source framework that provides ready-to use 
   frontend components for building responsive web interfaces. 
+- [ClickUp: Project Management](https://clickup.com/ "ClickUp: Project Management") - A free program management tool that 
+  provides whiteboards and other workspaces to streamline work flow.  View Board [Here.](https://app.clickup.com/9011008526/v/li/901100736029/ "[Here.]")
 - [Dreamstime: Stock Photos](https://www.dreamstime.com/stock-photos/ "Dreamstime: Stock Photos") - An online royalty-free 
   microstock provider.
 - [Vecteezy: Stock Photos](https://www.vecteezy.com/ "Vecteezy: Stock Photos") - An online marketplace for stock photos. 
-- [ClickUp: Project Management](https://clickup.com/ "ClickUp: Project Management") - A free program management tool that 
-  provides whiteboards and other workspaces to streamline work flow.  
 - [Open Street Maps API](https://www.openstreetmap.org/ "Open Street Maps API") - A map of the world, free to use under an 
   open license. 
 - [Open Brewery API](https://www.openbrewerydb.org/ "Open Brewery API") - A free, open source dataset and API with public 
@@ -31,11 +31,21 @@ The application was designed based on the following criteria:
   library fo mobile-friendly interactive maps.
 
 ## Depoloyed Application
-- Access the application here (link to project site)
--  (screenshot placeholder of app on mobile device)
+- Access the deployed application [here](https://daleray1231.github.io/TapMap// "here")
+- Access the GitHub repository [here](https://github.com/Daleray1231/TapMap/ "here")
+
+## Screenshots
+- Access a brief video [here](https://vimeo.com/867267507?share=copy/ "here")
+
+![Screenshot 1](https://github.com/tugwellchristi/Personal-Portfolio/assets/90078824/01c7c9c5-b31a-45c4-bf15-b47870278ea1)
+
+![Screenshot 2](https://github.com/tugwellchristi/Personal-Portfolio/assets/90078824/c7bd2fd5-e96b-4ba6-aa49-3c14e76e78ce)
+
+![Screenshot 3](https://github.com/tugwellchristi/Personal-Portfolio/assets/90078824/57f57073-a116-41e7-9c88-9c52e95484e8)
+
 
 ## Collaborators
-- Christi Tugwell - CSS, README.md
+- Christi Tugwell - CSS, README.md, ClickUp Board
 - Cimarron Jenschke - Javascript, APIs
 - Clayton Guerrero - HTML, CSS, APIs
 - Dale Haynie - CSS, APIs
