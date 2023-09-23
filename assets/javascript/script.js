@@ -16,9 +16,9 @@ function scrollToSearchHistory() {
   }
 }
 
-// Add an event listener to the custom beer button
-const customBeerButton = document.querySelector("#custom-beer-button");
-customBeerButton.addEventListener("click", scrollToSearchHistory);
+// // Add an event listener to the custom beer button
+// const customBeerButton = document.querySelector("#custom-beer-button");
+// customBeerButton.addEventListener("click", scrollToSearchHistory);
 
 // Initialize the map
 const map = L.map("mapid").setView([37.8, -96.9], 4); // Initialize centered on the US
@@ -141,28 +141,35 @@ function fitMapToMarkers() {
 
 // Fetch brewery data based on search parameters
 async function searchApi(query, type, queryType) {
+  // Clear any previous error messages
+  if (errorMessage.parentNode) {
+    errorMessage.remove();
+  }
+  
   clearMarkers();
+  
   const baseUrl = "https://api.openbrewerydb.org/breweries";
   const queryParam = queryType === "postalCode" ? "by_postal" : "by_city";
   const apiUrl = `${baseUrl}?${queryParam}=${query}&by_type=${type}`;
-
+  
   try {
     const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error("Something went wrong");
 
+    // Handling unsuccessful HTTP response
+    if (!response.ok) {
+      errorMessage.textContent = "Something went wrong. Please try again.";
+      errorMessage.style.color = "darkred";
+      searchFormEl.after(errorMessage);
+      return;
+    }
+    
     const breweryList = await response.json();
-
+    
     // Save the last search
     lastSearches.push(query);
-
+  
     // Display the last 5 searches
     displayLastSearches();
-
-    // Add markers to the map
-    breweryList.forEach(createCard);
-
-    // Fit the map to show all markers
-    fitMapToMarkers();
 
     // Error handling, invalid search
     if (!breweryList.length) {
@@ -170,11 +177,26 @@ async function searchApi(query, type, queryType) {
         "No breweries found. Try searching for a different type of brewery or a different ZIP or city";
       errorMessage.style.color = "darkred";
       searchFormEl.after(errorMessage);
+      return;
     } else {
+
+      scrollToSearchHistory ()
+
+      // Clear previous results, if any
       resultContentEl.innerHTML = "";
+      
+      // Add markers to the map
       breweryList.forEach(createCard);
+      
+      // Fit the map to show all markers
+      fitMapToMarkers();
     }
+    
   } catch (error) {
+    // Handling any exceptions that were thrown
+    errorMessage.textContent = "Something went wrong. Please try again.";
+    errorMessage.style.color = "darkred";
+    searchFormEl.after(errorMessage);
     console.error(error);
   }
 }
@@ -200,7 +222,6 @@ function handleSearchFormSubmit(event) {
   });
 
   // save the search input (city or zip code)
-
   lastSearches.push({ query: searchInputVal });
 
   // Keep only the last 5 searches
