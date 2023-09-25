@@ -98,7 +98,7 @@ function displayLastSearches() {
   lastSearchContainer.innerHTML = "";
 
   // Get unique search queries and store them in local storage
-  const uniqueSearches = [...new Set(lastSearches.map((search) => search.query))];
+  const uniqueSearches = [...new Set(lastSearches)];
   localStorage.setItem("recentSearches", JSON.stringify(uniqueSearches.slice(-maxSavedSearches)));
 
   // Display unique search queries in the search history container
@@ -108,6 +108,7 @@ function displayLastSearches() {
     lastSearchContainer.appendChild(searchItem);
   }
 }
+
 
 // Function to clear the result content
 function clearResultContent() {
@@ -206,6 +207,8 @@ async function handleSearchFormSubmit(event) {
 
   // Add an event listener to display recent searches when the page loads.
   window.addEventListener("load", displayRecentSearches);
+  displayRecentSearches(); // Initialize the display and the lastSearches array when the page loads
+
 
   // Pass searchInputVal as a parameter to the searchApi function.
   searchApi(
@@ -218,7 +221,7 @@ async function handleSearchFormSubmit(event) {
 
 // This function adds the latest search query to the list of recent searches.
 function addSearchToRecent(query) {
-  lastSearches.push({ query });
+  lastSearches.push(query);
 
   // Ensure that the list of recent searches doesn't exceed a maximum limit.
   if (lastSearches.length > maxSavedSearches) {
@@ -250,19 +253,19 @@ searchFormEl.addEventListener("submit", handleSearchFormSubmit);
 // This function displays a list of recent searches retrieved from localStorage.
 function displayRecentSearches() {
   const recentSearches = JSON.parse(localStorage.getItem("recentSearches")) || [];
+  lastSearches.length = 0;
+  lastSearches.push(...recentSearches); // Initialize the lastSearches array with data from local storage
+
   const lastSearchContainer = document.querySelector(".search-history");
   lastSearchContainer.innerHTML = "";
 
-  // Display a limited number of recent searches, up to a maximum of 5.
-  const numberToShow = Math.min(recentSearches.length, 5);
-
-  for (let i = recentSearches.length - numberToShow; i < recentSearches.length; i++) {
-    const search = recentSearches[i].query;
+  for (const search of recentSearches) {
     const searchItem = document.createElement("div");
-    searchItem.textContent = search;
+    searchItem.textContent = search; // Access the 'query' property
     searchItem.classList.add("search-item");
     lastSearchContainer.appendChild(searchItem);
   }
+  
 }
 
 // This function checks if a given query is a postal code (consists of digits).
