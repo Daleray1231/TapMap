@@ -7,7 +7,10 @@ const lastSearches = []; // Array to store the last searches
 let markers = []; // Array to store map markers
 
 // Creating a Leaflet map
-const map = L.map("mapid").setView([37.8, -96.9], 4); // Creates a Leaflet map with initial coordinates and zoom level
+const map = L.map("mapid", {
+  scrollWheelZoom: false, // Disable scroll wheel zoom
+}).setView([37.8, -96.9], 4);
+
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
 }).addTo(map); // Adds a tile layer to the map using OpenStreetMap tiles
