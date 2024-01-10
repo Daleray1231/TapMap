@@ -1,1 +1,41 @@
+# Node.js related
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Compiled files
+dist/
+*.log
+*.tsbuildinfo
+
+# macOS related
 .DS_Store
+
+# Editor-specific files
+.vscode/
+*.code-workspace
+
+# Dependency directories
+/.pnp
+.pnp.js
+
+# Environment variables file
+.env
+
+# OS generated files
+Thumbs.db
+.DS_Store?
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# Temporary files
+*.tmp
+*.bak
