@@ -28,10 +28,12 @@
 
 .start-container {
     display: inline-block;
-    border: 2px solid hsl(141, 53%, 21%); /* Darker than the button for contrast */
+    border: 2px solid hsl(141, 53%, 21%);
+    /* Darker than the button for contrast */
     padding: 10px;
     border-radius: 7px;
-    background-color: hsl(141, 53%, 21%); /* A bit darker for contrast */
+    background-color: hsl(141, 53%, 21%);
+    /* A bit darker for contrast */
     box-shadow: inset 0 20px 4px -19px rgba(255, 255, 255, 0.7);
 }
 
@@ -62,33 +64,44 @@
 
 .search-history {
     display: flex;
-   justify-content: center; /* Center items horizontally */
-    flex-wrap: wrap; /* Allows items to wrap to next row */
+    justify-content: center;
+    /* Center items horizontally */
+    flex-wrap: wrap;
+    /* Allows items to wrap to next row */
 }
 
 .search-history div {
-    margin: 5px; /* Added space between the displayed saved searches */
+    margin: 5px;
+    /* Added space between the displayed saved searches */
 }
 
 /* CSS for Team Member images */
 .team-member-image {
-    width: 150px; /* Set a fixed width for the images */
-    height: 150px; /* Set a fixed height for the images */
-    border-radius: 50%; /* Make the images circular */
-    object-fit: cover; /* Maintain image aspect ratio and cover the entire space */
-    margin-bottom: 10px; /* Add some bottom margin for spacing */
-  }
+    width: 150px;
+    /* Set a fixed width for the images */
+    height: 150px;
+    /* Set a fixed height for the images */
+    border-radius: 50%;
+    /* Make the images circular */
+    object-fit: cover;
+    /* Maintain image aspect ratio and cover the entire space */
+    margin-bottom: 10px;
+    /* Add some bottom margin for spacing */
+}
 
-  /* CSS for evenly distributing Team Member tiles */
-  .team_container {
+/* CSS for evenly distributing Team Member tiles */
+.team_container {
     display: flex;
-    justify-content: space-between; /* Distribute tiles evenly */
-    flex-wrap: wrap; /* Allow tiles to wrap to the next row if needed */
-  }
+    justify-content: space-between;
+    /* Distribute tiles evenly */
+    flex-wrap: wrap;
+    /* Allow tiles to wrap to the next row if needed */
+}
 
-  .team_member {
-    flex: 0 0 calc(20% - 20px); /* Set width for each tile (adjust as needed) */
-  }
+.team_member {
+    flex: 0 0 calc(20% - 20px);
+    /* Set width for each tile (adjust as needed) */
+}
 
 
 /* added css for members (pre-fixSearchResults) */
@@ -99,43 +112,52 @@
     max-height: 226px;
     height: 226px;
 }
- .member_links {
+
+.member_links {
     width: 350px;
     max-height: 320px;
- }
+}
+
 aside {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
 a {
     text-decoration: none;
     color: #363636;
 }
+
 figure {
     margin-top: 12px;
 }
 
-h5{
+h5 {
     text-align: center;
 }
 
 /* CSS for tablet-size screens or smaller */
 @media (max-width: 768px) {
     .container {
-        flex-direction: column-reverse; /* Change to a column layout and reverse the order */
+        flex-direction: column-reverse;
+        /* Change to a column layout and reverse the order */
     }
 
     .left-panel,
     .right-panel {
-        flex: auto; /* Allow both panels to take up the available space */
-        width: 100%; /* Make them full width */
-        margin: 0; /* Remove margin between panels */
+        flex: auto;
+        /* Allow both panels to take up the available space */
+        width: 100%;
+        /* Make them full width */
+        margin: 0;
+        /* Remove margin between panels */
     }
 
     #mapid {
-        height: 300px; /* Adjust the map's height for smaller screens */
+        height: 300px;
+        /* Adjust the map's height for smaller screens */
     }
 
 }

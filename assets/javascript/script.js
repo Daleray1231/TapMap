@@ -125,53 +125,53 @@ async function searchApi(query, type, queryType, searchInputVal) {
   clearErrorMessage(); // Clear any previous error messages
 
   // Define the base URL for the OpenBreweryDB API.
-const baseUrl = "https://api.openbrewerydb.org/breweries";
+  const baseUrl = "https://api.openbrewerydb.org/breweries";
 
-// Determine the query parameter based on the queryType (postalCode or city).
-const queryParam = queryType === "postalCode" ? "by_postal" : "by_city";
+  // Determine the query parameter based on the queryType (postalCode or city).
+  const queryParam = queryType === "postalCode" ? "by_postal" : "by_city";
 
-// Construct the complete API URL with query parameters, including type.
-const apiUrl = `${baseUrl}?${queryParam}=${query}&by_type=${type}`;
+  // Construct the complete API URL with query parameters, including type.
+  const apiUrl = `${baseUrl}?${queryParam}=${query}&by_type=${type}`;
 
-try {
-  // Try to fetch data from the API using the constructed URL.
-  const response = await fetch(apiUrl);
+  try {
+    // Try to fetch data from the API using the constructed URL.
+    const response = await fetch(apiUrl);
 
-  // Check if the response is not okay (e.g., status code other than 200).
-  if (!response.ok) {
-    // Display an error message and exit the function.
-    displayErrorMessage("Something went wrong. Please try again.");
-    return;
-  }
+    // Check if the response is not okay (e.g., status code other than 200).
+    if (!response.ok) {
+      // Display an error message and exit the function.
+      displayErrorMessage("Something went wrong. Please try again.");
+      return;
+    }
 
     // Parse the response data as JSON.
-  const breweryList = await response.json();
+    const breweryList = await response.json();
 
     // Check if the brewery list is empty.
-  if (!breweryList.length) {
-    // Display a message for no results and exit the function.
-    displayErrorMessage(
-      "No breweries found. Try searching for a different type of brewery or a different ZIP or city"
-    );
-    return;
-  } else {
-    // Scroll to the search history section.
-    scrollToSearchHistory();
+    if (!breweryList.length) {
+      // Display a message for no results and exit the function.
+      displayErrorMessage(
+        "No breweries found. Try searching for a different type of brewery or a different ZIP or city"
+      );
+      return;
+    } else {
+      // Scroll to the search history section.
+      scrollToSearchHistory();
 
-    // Create cards for each brewery in the list.
-    breweryList.forEach(createCard);
+      // Create cards for each brewery in the list.
+      breweryList.forEach(createCard);
 
-    // Add the current search to the recent searches list.
-    addSearchToRecent(searchInputVal);
+      // Add the current search to the recent searches list.
+      addSearchToRecent(searchInputVal);
 
-    // Fit the map to display markers for the breweries.
-    fitMapToMarkers();
+      // Fit the map to display markers for the breweries.
+      fitMapToMarkers();
+    }
+  } catch (error) {
+    // Handle any errors that occur during the try block.
+    displayErrorMessage("Something went wrong. Please try again.");
+    console.error(error);
   }
-} catch (error) {
-  // Handle any errors that occur during the try block.
-  displayErrorMessage("Something went wrong. Please try again.");
-  console.error(error);
-}
 }
 
 function displayErrorMessage(message) {
@@ -268,7 +268,7 @@ function displayRecentSearches() {
     searchItem.classList.add("search-item");
     lastSearchContainer.appendChild(searchItem);
   }
-  
+
 }
 
 // This function checks if a given query is a postal code (consists of digits).
